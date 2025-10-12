@@ -9,7 +9,7 @@
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=1080 height=1920 tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -52,12 +52,12 @@
       }
 
       var buildUrl = "Build";
-      var loaderUrl = buildUrl + "/Sumsy.loader.js";
+      var loaderUrl = buildUrl + "/Sumsy_Web_Build.loader.js";
       var config = {
         arguments: [],
-        dataUrl: buildUrl + "/Sumsy.data.br",
-        frameworkUrl: buildUrl + "/Sumsy.framework.js.br",
-        codeUrl: buildUrl + "/Sumsy.wasm.br",
+        dataUrl: buildUrl + "/Sumsy_Web_Build.data",
+        frameworkUrl: buildUrl + "/Sumsy_Web_Build.framework.js",
+        codeUrl: buildUrl + "/Sumsy_Web_Build.wasm",
         streamingAssetsUrl: "StreamingAssets",
         companyName: "VizCo",
         productName: "Sumsy",
