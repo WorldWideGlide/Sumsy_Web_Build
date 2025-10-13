@@ -114,7 +114,7 @@
         //canvas.style.width = "1080px";
         //canvas.style.height = "1920px";
 		// Responsive desktop style with enforced 16:9 aspect ratio
-		const aspect = 9 / 16;
+		const aspect = 16 / 9;
 
 		function resizeCanvas() {
 		let width = window.innerWidth;
@@ -146,9 +146,9 @@
           document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
               }).then((unityInstance) => {
                 document.querySelector("#unity-loading-bar").style.display = "none";
-                document.querySelector("#unity-fullscreen-button").onclick = () => {
-                  unityInstance.SetFullscreen(1);
-                };
+                //document.querySelector("#unity-fullscreen-button").onclick = () => {
+                  //unityInstance.SetFullscreen(1);
+                //};
 
               }).catch((message) => {
                 alert(message);
