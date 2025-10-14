@@ -118,7 +118,7 @@
         //canvas.style.width = "1920px";
         //canvas.style.height = "1080px";
 		function resizeCanvas() {
-		const aspect = 16 / 9;
+		const aspect = 9 / 16;
 		const width = window.innerWidth;
 		const height = window.innerHeight;
 
@@ -130,15 +130,15 @@
 			newWidth = height * aspect;
 		}
 
-    canvas.style.width = newWidth + "px";
-    canvas.style.height = newHeight + "px";
-  }
+		canvas.style.width = newWidth + "px";
+		canvas.style.height = newHeight + "px";
+	}
 
-  window.addEventListener("resize", resizeCanvas);
-  resizeCanvas(); // call once on load
-      }
+		window.addEventListener("resize", resizeCanvas);
+		resizeCanvas(); // call once on load
+		}
 
-      document.querySelector("#unity-loading-bar").style.display = "block";
+		document.querySelector("#unity-loading-bar").style.display = "block";
 
       var script = document.createElement("script");
       script.src = loaderUrl;
