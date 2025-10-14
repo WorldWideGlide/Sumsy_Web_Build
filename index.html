@@ -40,7 +40,7 @@
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
-      <canvas id="unity-canvas" width=1080 height=1920 tabindex="-1"></canvas>
+      <canvas id="unity-canvas" width="1920" height="1080" tabindex="-1"></canvas>
       <div id="unity-loading-bar">
         <div id="unity-logo"></div>
         <div id="unity-progress-bar-empty">
@@ -101,7 +101,7 @@
         //    return true;
         // },
       };
-	  //config.matchWebGLToCanvasSize = true;
+	  config.matchWebGLToCanvasSize = true;
 
       // By default, Unity keeps WebGL canvas render target size matched with
       // the DOM size of the canvas element (scaled by window.devicePixelRatio)
@@ -138,27 +138,29 @@
         // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
         //canvas.style.width = "1080px";
         //canvas.style.height = "1920px";
-		const aspect = 9 / 16;
-		const winW = window.innerWidth;
-		const winH = window.innerHeight;
-		let canvasW, canvasH;
+		const aspect = 16 / 9;
+		function resizeCanvas() {
+		  const winW = window.innerWidth;
+		  const winH = window.innerHeight;
+		  let canvasW, canvasH;
 
-		// calculate best fit within current window
-		if (winW / winH > aspect) {
-		canvasH = winH;
-		canvasW = canvasH * aspect;
-		} else {
-		  canvasW = winW;
-		  canvasH = canvasW / aspect;
-		}
+		  if (winW / winH > aspect) {
+			canvasH = winH;
+			canvasW = canvasH * aspect;
+		  } else {
+			canvasW = winW;
+			canvasH = canvasW / aspect;
+		  }
 
-		// apply sizing + centering
-		canvas.style.width = `${canvasW}px`;
-		canvas.style.height = `${canvasH}px`;
-		canvas.style.position = "absolute";
-		canvas.style.left = `${(winW - canvasW) / 2}px`;
-		canvas.style.top = `${(winH - canvasH) / 2}px`;
+		  canvas.style.width = `${canvasW}px`;
+		  canvas.style.height = `${canvasH}px`;
+		  canvas.style.position = "absolute";
+		  canvas.style.left = `${(winW - canvasW) / 2}px`;
+		  canvas.style.top = `${(winH - canvasH) / 2}px`;
       }
+	  
+		window.addEventListener("resize", resizeCanvas);
+		resizeCanvas();
 
       document.querySelector("#unity-loading-bar").style.display = "block";
 
