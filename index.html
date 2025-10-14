@@ -17,6 +17,27 @@
 	<!-- Optional: theme color for Android title bar 
 	<meta name="theme-color" content="#000000">-->
     <link rel="stylesheet" href="TemplateData/style.css">
+	<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background: #000; /* full black background */
+    height: 100%;
+    width: 100%;
+  }
+  #unity-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: #000; /* in case body background fails */
+  }
+  canvas {
+    display: block;
+    background: #000; /* canvas background stays black during load */
+  }
+</style>
+
   </head>
   <body>
     <div id="unity-container" class="unity-desktop">
@@ -114,28 +135,32 @@
 
 
       } else {
-        // Desktop style: Render the game canvas in a window that can be maximized to fullscreen:
-        //canvas.style.width = "1920px";
-        //canvas.style.height = "1080px";
-		function resizeCanvas() {
-		const aspect = 9 / 16;
-		const width = window.innerWidth;
-		const height = window.innerHeight;
+        // Maintain 16:9 ratio, scale to fit viewport, and center on screen
+	function resizeCanvas() {
+    const aspect = 16 / 9;
+    const winW = window.innerWidth;
+    const winH = window.innerHeight;
+    let canvasW, canvasH;
 
-		// calculate the largest 16:9 area that fits inside window
-		let newWidth = width;
-		let newHeight = width / aspect;
-		if (newHeight > height) {
-			newHeight = height;
-			newWidth = height * aspect;
-		}
+    // fit inside viewport
+    if (winW / winH > aspect) {
+      canvasH = winH;
+      canvasW = canvasH * aspect;
+    } else {
+      canvasW = winW;
+      canvasH = canvasW / aspect;
+    }
 
-		canvas.style.width = newWidth + "px";
-		canvas.style.height = newHeight + "px";
-	}
+    // apply size and center via CSS
+    canvas.style.width = `${canvasW}px`;
+    canvas.style.height = `${canvasH}px`;
+    canvas.style.position = "absolute";
+    canvas.style.left = `${(winW - canvasW) / 2}px`;
+    canvas.style.top = `${(winH - canvasH) / 2}px`;
+  }
 
-		window.addEventListener("resize", resizeCanvas);
-		resizeCanvas(); // call once on load
+  window.addEventListener("resize", resizeCanvas);
+  resizeCanvas();
 		}
 
 		document.querySelector("#unity-loading-bar").style.display = "block";
