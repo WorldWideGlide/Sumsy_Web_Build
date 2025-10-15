@@ -30,13 +30,37 @@
         display: block;
         background: #000;
       }
-      /* Hide the Unity logo or replace it */
+      /* Centered loading layout */
+      #unity-loading-bar {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        max-width: 320px;
+      }
       #unity-logo {
         background: url('TemplateData/Phone_Icon_1.png') no-repeat center center;
         background-size: contain;
         width: 256px;
         height: 128px;
-        margin: 0 auto 20px auto;
+        margin-bottom: 20px;
+      }
+      #unity-progress-bar-empty {
+        width: 100%;
+        background: rgba(255,255,255,0.2);
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      #unity-progress-bar-full {
+        width: 0%;
+        height: 20px;
+        background: #00aaff;
+        transition: width 0.2s;
       }
     </style>
   </head>
@@ -62,7 +86,6 @@
       const unityContainer = document.getElementById("unity-container");
 
       if (!isMobile) {
-        // Hide Unity and show mobile-only message
         unityContainer.innerHTML = `
           <div style="display:flex;align-items:center;justify-content:center;height:100vh;text-align:center;color:white;background:black;font-family:sans-serif;font-size:1.5rem;">
             For Android and iOS only
@@ -110,7 +133,7 @@
         document.querySelector("#unity-container").className = "unity-mobile";
         canvas.className = "unity-mobile";
 
-        document.querySelector("#unity-loading-bar").style.display = "block";
+        document.querySelector("#unity-loading-bar").style.display = "flex";
 
         var script = document.createElement("script");
         script.src = loaderUrl;
